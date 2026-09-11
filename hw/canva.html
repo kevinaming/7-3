@@ -120,20 +120,43 @@
   .hero-meta .item .label{font-family:'JetBrains Mono',monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);}
   .hero-meta .item .value{font-weight:700; margin-top:3px; color:var(--accent);}
 
-  .hero-art{flex:none; width:230px; height:230px; position:relative; display:flex; align-items:center; justify-content:center;}
+  .hero-art{flex:none; width:250px; height:250px; position:relative; display:flex; align-items:center; justify-content:center;}
   .hero-burst{position:absolute; width:104%; height:104%; fill:var(--pop); stroke:var(--ink); stroke-width:2px; animation:hero-spin 24s linear infinite;}
   @keyframes hero-spin{ to{ transform:rotate(360deg); } }
-  .hero-figure{position:relative; width:74%;}
-  .hero-bubble{
-    position:absolute; top:-4px; right:-22px; background:var(--card); border:2.5px solid var(--ink);
-    border-radius:14px; padding:7px 11px; font-family:'Kalam',cursive; font-weight:700; font-size:.76rem;
-    box-shadow:3px 3px 0 var(--ink); transform:rotate(5deg); max-width:118px; text-align:center; line-height:1.25;
-  }
-  .hero-bubble::after{content:""; position:absolute; left:18px; bottom:-11px; width:0; height:0; border:11px solid transparent; border-top-color:var(--ink); border-bottom:0;}
-  .hero-bubble::before{content:""; position:absolute; left:21.5px; bottom:-6.5px; width:0; height:0; border:8px solid transparent; border-top-color:var(--card); border-bottom:0; z-index:1;}
+  .hero-char{position:relative; width:88%; height:auto; display:block; filter:drop-shadow(4px 4px 0 var(--ink));}
   @media (max-width:900px){
     .hero-art{display:none;}
   }
+
+  /* Mascotas por sección: decorativas, se ocultan en pantallas angostas */
+  .section-mascot{
+    position:absolute; top:6px; right:24px; width:104px; height:auto;
+    filter:drop-shadow(3px 3px 0 var(--ink)); transform:rotate(-3deg);
+  }
+  @media (max-width:920px){ .section-mascot{display:none;} }
+  #picker, #reglas, #estructura{position:relative;}
+
+  .t7-group-avatar{
+    width:46px; height:46px; object-fit:contain; flex:none;
+    filter:drop-shadow(1.5px 1.5px 0 var(--ink));
+  }
+
+  .t7-note-row{display:flex; align-items:flex-end; gap:14px; margin-top:22px;}
+  .t7-note-row .t7-note{margin-top:0; flex:1;}
+  .t7-note-char{width:84px; height:auto; flex:none; filter:drop-shadow(2.5px 2.5px 0 var(--ink));}
+  @media (max-width:560px){ .t7-note-char{display:none;} }
+
+  .t7-cta{
+    display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;
+    margin-top:36px; padding-top:28px; border-top:2px dashed var(--line);
+  }
+  .t7-cta img{width:150px; height:auto; filter:drop-shadow(4px 4px 0 var(--ink));}
+  .t7-cta a.t7-cta-btn{
+    font-family:'Bangers',cursive; font-size:1.1rem; letter-spacing:.02em; color:#fff;
+    background:var(--accent); border:2.5px solid var(--ink); border-radius:999px; padding:9px 24px;
+    text-decoration:none; box-shadow:4px 4px 0 var(--ink); transition:.15s;
+  }
+  .t7-cta a.t7-cta-btn:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink);}
 
   section.block{padding:52px 0;}
   section.block.alt{background:var(--bg-alt); border-top:3px solid var(--ink); border-bottom:3px solid var(--ink);}
@@ -183,10 +206,11 @@
     border-bottom:2px solid var(--ink);
   }
   .t7-group-head{
-    display:flex; align-items:center; gap:14px; width:100%; box-sizing:border-box;
+    display:flex; align-items:flex-start; gap:14px; width:100%; box-sizing:border-box;
     border:none; background:none; margin:0; padding:22px 20px 18px; font:inherit; color:inherit;
     text-align:left; cursor:pointer; border-bottom:2px solid var(--line);
   }
+  .t7-group-hint, .t7-group-chevron{margin-top:2px;}
   .t7-group-head:hover{background:var(--bg-alt);}
   .t7-group-head:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
   .t7-group-headtext{display:flex; flex-direction:column; gap:6px; flex:1; min-width:0;}
@@ -336,33 +360,14 @@
       <svg class="hero-burst" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
         <polygon points="140.0,10.0 164.8,47.3 205.0,27.4 207.9,72.1 252.6,75.0 232.7,115.2 270.0,140.0 232.7,164.8 252.6,205.0 207.9,207.9 205.0,252.6 164.8,232.7 140.0,270.0 115.2,232.7 75.0,252.6 72.1,207.9 27.4,205.0 47.3,164.8 10.0,140.0 47.3,115.2 27.4,75.0 72.1,72.1 75.0,27.4 115.2,47.3"/>
       </svg>
-      <svg class="hero-figure" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="35" cy="60" r="22" style="fill:var(--accent-soft)" stroke="var(--ink)" stroke-width="3"/>
-        <rect x="26" y="58" width="18" height="15" rx="3" style="fill:var(--ink)"/>
-        <path d="M29 58 v-7 a6 6 0 0 1 12 0 v7" fill="none" style="stroke:var(--ink)" stroke-width="3"/>
-        <circle cx="25" cy="192" r="20" style="fill:var(--card)" stroke="var(--ink)" stroke-width="3"/>
-        <circle cx="25" cy="198" r="2.6" style="fill:var(--ink)"/>
-        <path d="M17 192 a11 11 0 0 1 16 0" fill="none" style="stroke:var(--ink)" stroke-width="3" stroke-linecap="round"/>
-        <path d="M11.5 185.5 a19.5 19.5 0 0 1 27 0" fill="none" style="stroke:var(--ink)" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="213" cy="208" r="18" style="fill:var(--pop)" stroke="var(--ink)" stroke-width="3"/>
-        <text x="213" y="215" font-size="19" text-anchor="middle" style="fill:#1a1a1a">★</text>
-        <path d="M40,240 L40,190 Q40,140 90,132 L150,132 Q200,140 200,190 L200,240 Z" style="fill:var(--accent)" stroke="var(--ink)" stroke-width="4" stroke-linejoin="round"/>
-        <path d="M165,150 Q196,140 198,101 Q199,90 211,90 L211,106 Q206,151 176,169 Z" style="fill:var(--accent)" stroke="var(--ink)" stroke-width="4" stroke-linejoin="round"/>
-        <circle cx="120" cy="85" r="44" style="fill:var(--ink)"/>
-        <rect x="193" y="54" width="34" height="58" rx="6" style="fill:var(--card)" stroke="var(--ink)" stroke-width="4"/>
-        <g style="stroke:var(--pop)" stroke-width="4" stroke-linecap="round">
-          <line x1="189" y1="48" x2="178" y2="35"/>
-          <line x1="207" y1="43" x2="205" y2="27"/>
-          <line x1="224" y1="49" x2="235" y2="38"/>
-        </g>
-      </svg>
-      <div class="hero-bubble">¡Prepara<br>tu Canva!</div>
+      <img class="hero-char" src="../assets/characters/naruto-prepara-tu-canva.png" alt="">
     </div>
   </div>
 </header>
 
 <section class="block" id="picker">
   <div class="wrap">
+    <img class="section-mascot" src="../assets/characters/pikachu-vamos-a-crear.png" alt="" aria-hidden="true">
     <div class="section-head">
       <span class="kicker">Antes de empezar</span>
       <h2>Encuentra tu nombre</h2>
@@ -404,6 +409,7 @@
 
 <section class="block" id="reglas">
   <div class="wrap">
+    <img class="section-mascot" src="../assets/characters/luffy-tu-puedes.png" alt="" aria-hidden="true">
     <div class="section-head">
       <span class="kicker">Para todos los grupos</span>
       <h2>Reglas generales</h2>
@@ -423,6 +429,7 @@
 
 <section class="block alt" id="estructura">
   <div class="wrap">
+    <img class="section-mascot" src="../assets/characters/kakashi-planifica-crea-presenta.png" alt="" aria-hidden="true">
     <div class="section-head">
       <span class="kicker">Esqueleto común</span>
       <h2>Los 12 slides, en orden</h2>
@@ -457,6 +464,7 @@
 
       <article class="t7-group c-g1" id="g1">
         <button type="button" class="t7-group-head" aria-expanded="false">
+          <img class="t7-group-avatar" src="../assets/characters/gojo-ideas-grandes.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">Cómo hackear a las personas</span>
             <span class="t7-names">Kamille Colón Valentín &nbsp;·&nbsp; Jairo Robles Rosa</span>
@@ -487,6 +495,7 @@
 
       <article class="t7-group c-g2" id="g2">
         <button type="button" class="t7-group-head" aria-expanded="false">
+          <img class="t7-group-avatar" src="../assets/characters/chopper-tu-puedes.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">Qué hace que los videojuegos sean adictivos</span>
             <span class="t7-names">Johneyshka Alvarez Albelo &nbsp;·&nbsp; Jesuham Otero Torres</span>
@@ -517,6 +526,7 @@
 
       <article class="t7-group c-g3" id="g3">
         <button type="button" class="t7-group-head" aria-expanded="false">
+          <img class="t7-group-avatar" src="../assets/characters/deku-da-lo-mejor-de-ti.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">Inteligencia Artificial, ¿amiga o enemiga?</span>
             <span class="t7-names">Diego Ramos Milian &nbsp;·&nbsp; Celyann Sánchez Pérez</span>
@@ -547,6 +557,7 @@
 
       <article class="t7-group c-g4" id="g4">
         <button type="button" class="t7-group-head" aria-expanded="false">
+          <img class="t7-group-avatar" src="../assets/characters/nezuko-buen-progreso.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">¿El misterio del internet?</span>
             <span class="t7-names">Yeray Naim Chevere Rivera &nbsp;·&nbsp; Keilianys Torres Cruz</span>
@@ -577,6 +588,7 @@
 
       <article class="t7-group c-g5" id="g5">
         <button type="button" class="t7-group-head" aria-expanded="false">
+          <img class="t7-group-avatar" src="../assets/characters/luffy-equipo-increible.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">¿Cómo se hacen los efectos especiales?</span>
             <span class="t7-names">Adriana Cortés Vázquez &nbsp;·&nbsp; Daniella Otero Reyes</span>
@@ -607,6 +619,7 @@
 
       <article class="t7-group c-g6" id="g6">
         <button type="button" class="t7-group-head" aria-expanded="false">
+          <img class="t7-group-avatar" src="../assets/characters/bulma-organiza-tus-ideas.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">¿Cómo saben las apps lo que te gusta?</span>
             <span class="t7-names">Irvin Javier Ortega Sánchez &nbsp;·&nbsp; Yahir Cora Carrion</span>
@@ -637,8 +650,16 @@
 
     </div>
 
-    <div class="t7-note">
-      <strong>Antes de exponer:</strong> practiquen la charla completa en voz alta al menos una vez, con reloj. Si pasa de 7 minutos, quiten texto de los slides — no lo lean.
+    <div class="t7-note-row">
+      <img class="t7-note-char" src="../assets/characters/goku-excelente-trabajo.png" alt="">
+      <div class="t7-note">
+        <strong>Antes de exponer:</strong> practiquen la charla completa en voz alta al menos una vez, con reloj. Si pasa de 7 minutos, quiten texto de los slides — no lo lean.
+      </div>
+    </div>
+
+    <div class="t7-cta">
+      <img src="../assets/characters/anime-girl-hora-de-disenar.png" alt="">
+      <a class="t7-cta-btn" href="https://www.canva.com/" target="_blank" rel="noopener">Abrir Canva</a>
     </div>
   </div>
 </section>
