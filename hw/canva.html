@@ -190,7 +190,7 @@
   .t7-group-head:hover{background:var(--bg-alt);}
   .t7-group-head:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
   .t7-group-headtext{display:flex; flex-direction:column; gap:6px; flex:1; min-width:0;}
-  .t7-group-head .t7-topic{font-family:'Bangers',cursive; font-size:1.3rem; font-weight:400; letter-spacing:.02em; color:var(--gc-fg); margin:0;}
+  .t7-group-head .t7-topic{font-family:'Bangers',cursive; font-size:1.3rem; font-weight:400; letter-spacing:.02em; color:var(--gc-text); margin:0;}
   .t7-group-head .t7-names{font-family:'JetBrains Mono',monospace; font-size:.76rem; color:var(--ink-soft); margin:0;}
   .t7-group-hint{
     font-family:'Kalam',cursive; font-weight:700; font-size:.72rem; text-transform:uppercase; letter-spacing:.03em;
@@ -200,7 +200,7 @@
   .t7-group-head[aria-expanded="true"] .t7-group-hint::after{content:"Ocultar";}
   .t7-group-chevron{
     flex:none; width:22px; height:22px; display:flex; align-items:center; justify-content:center;
-    transition:transform .25s ease; color:var(--gc-fg); font-size:1.15rem; font-weight:700;
+    transition:transform .25s ease; color:var(--gc-text); font-size:1.15rem; font-weight:700;
   }
   .t7-group-chevron::before{content:"⌄";}
   .t7-group-head[aria-expanded="true"] .t7-group-chevron{transform:rotate(180deg);}
@@ -213,17 +213,34 @@
   ol.t7-slides li:first-child{border-top:none;}
   ol.t7-slides li::before{
     counter-increment:sl; content:"S" counter(sl); position:absolute; left:0; top:6px;
-    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:.72rem; color:var(--gc-fg);
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:.72rem; color:var(--gc-text);
   }
   ol.t7-slides li strong{color:var(--ink);}
 
-  /* Colores por grupo */
-  .c-g1{--gc-bg:#fde1e6;--gc-fg:#9f1239}
-  .c-g2{--gc-bg:#ffe7cd;--gc-fg:#9a3412}
-  .c-g3{--gc-bg:#ece3fd;--gc-fg:#5b21b6}
-  .c-g4{--gc-bg:#d3f3fb;--gc-fg:#0e6379}
-  .c-g5{--gc-bg:#fbe1f6;--gc-fg:#86198f}
-  .c-g6{--gc-bg:#e3f6cd;--gc-fg:#3f6212}
+  /* Colores por grupo. --gc-fg es oscuro (pensado para fondo claro: la
+     franja superior y las fichas del picker). --gc-text es lo que se usa
+     para texto sobre --card, que en modo oscuro es oscuro: por eso
+     --gc-text tiene una variante clara propia en modo oscuro más abajo. */
+  .c-g1{--gc-bg:#fde1e6;--gc-fg:#9f1239;--gc-text:#9f1239;}
+  .c-g2{--gc-bg:#ffe7cd;--gc-fg:#9a3412;--gc-text:#9a3412;}
+  .c-g3{--gc-bg:#ece3fd;--gc-fg:#5b21b6;--gc-text:#5b21b6;}
+  .c-g4{--gc-bg:#d3f3fb;--gc-fg:#0e6379;--gc-text:#0e6379;}
+  .c-g5{--gc-bg:#fbe1f6;--gc-fg:#86198f;--gc-text:#86198f;}
+  .c-g6{--gc-bg:#e3f6cd;--gc-fg:#3f6212;--gc-text:#3f6212;}
+  :root[data-theme="dark"] .c-g1{--gc-text:#fda4af;}
+  :root[data-theme="dark"] .c-g2{--gc-text:#fdba74;}
+  :root[data-theme="dark"] .c-g3{--gc-text:#c4b5fd;}
+  :root[data-theme="dark"] .c-g4{--gc-text:#67e8f9;}
+  :root[data-theme="dark"] .c-g5{--gc-text:#f0abfc;}
+  :root[data-theme="dark"] .c-g6{--gc-text:#bef264;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .c-g1{--gc-text:#fda4af;}
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .c-g2{--gc-text:#fdba74;}
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .c-g3{--gc-text:#c4b5fd;}
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .c-g4{--gc-text:#67e8f9;}
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .c-g5{--gc-text:#f0abfc;}
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .c-g6{--gc-text:#bef264;}
+  }
   :root[data-theme="dark"] .t7-group::before{filter:saturate(.8) brightness(1.15);}
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]):not([data-theme="dark"]) .t7-group::before{filter:saturate(.8) brightness(1.15);}
