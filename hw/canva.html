@@ -46,6 +46,7 @@
   }
 
   *{box-sizing:border-box;}
+  [hidden]{display:none !important;}
   html{scroll-behavior:smooth;}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55;}
   h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--ink); margin:0 0 .4em 0; letter-spacing:-0.02em;}
@@ -139,9 +140,30 @@
     box-shadow:var(--shadow); overflow:hidden; position:relative;
   }
   .t7-group::before{content:""; position:absolute; top:0; left:0; right:0; height:6px; background:var(--gc-fg);}
-  .t7-group-head{padding:24px 20px 16px; border-bottom:1.5px solid var(--line);}
-  .t7-group-head .t7-topic{font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--gc-fg); margin:0 0 6px;}
+  .t7-group-head{
+    display:flex; align-items:center; gap:14px; width:100%; box-sizing:border-box;
+    border:none; background:none; margin:0; padding:20px 20px 18px; font:inherit; color:inherit;
+    text-align:left; cursor:pointer; border-bottom:1.5px solid var(--line);
+  }
+  .t7-group-head:hover{background:var(--bg-alt);}
+  .t7-group-head:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
+  .t7-group-headtext{display:flex; flex-direction:column; gap:6px; flex:1; min-width:0;}
+  .t7-group-head .t7-topic{font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--gc-fg); margin:0;}
   .t7-group-head .t7-names{font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--ink-soft); margin:0;}
+  .t7-group-hint{
+    font-family:'JetBrains Mono',monospace; font-size:.66rem; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--ink-soft); white-space:nowrap; flex:none;
+  }
+  .t7-group-hint::after{content:"Ver guía";}
+  .t7-group-head[aria-expanded="true"] .t7-group-hint::after{content:"Ocultar";}
+  .t7-group-chevron{
+    flex:none; width:20px; height:20px; display:flex; align-items:center; justify-content:center;
+    transition:transform .25s ease; color:var(--gc-fg); font-size:1.05rem; font-weight:700;
+  }
+  .t7-group-chevron::before{content:"⌄";}
+  .t7-group-head[aria-expanded="true"] .t7-group-chevron{transform:rotate(180deg);}
+  .t7-group-collapse{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .t7-group.is-open .t7-group-collapse{max-height:2800px;}
   .t7-group-body{padding:16px 20px 20px;}
   .t7-group-body > .t7-lead{margin:0 0 14px; font-size:.9rem; color:var(--ink-soft);}
   ol.t7-slides{margin:0; padding:0; list-style:none; counter-reset:sl; display:grid; gap:9px;}
@@ -345,10 +367,15 @@
     <div class="t7-groups">
 
       <article class="t7-group c-g1" id="g1">
-        <div class="t7-group-head">
-          <p class="t7-topic">Cómo hackear a las personas</p>
-          <p class="t7-names">Kamille Colón Valentín &nbsp;·&nbsp; Jairo Robles Rosa</p>
-        </div>
+        <button type="button" class="t7-group-head" aria-expanded="false">
+          <span class="t7-group-headtext">
+            <span class="t7-topic">Cómo hackear a las personas</span>
+            <span class="t7-names">Kamille Colón Valentín &nbsp;·&nbsp; Jairo Robles Rosa</span>
+          </span>
+          <span class="t7-group-hint" aria-hidden="true"></span>
+          <span class="t7-group-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="t7-group-collapse">
         <div class="t7-group-body">
           <p class="t7-lead">Su tema NO es de computadoras: es de <strong>ingeniería social</strong> — engañar a la persona para que ella misma entregue su información. Ese es el hilo de toda la charla.</p>
           <ol class="t7-slides">
@@ -365,14 +392,20 @@
             <li><strong>Conclusión + opinión.</strong> "El eslabón más débil de la seguridad es la persona." Qué aprendieron ustedes y qué van a cambiar.</li>
             <li><strong>Referencias.</strong> Ej.: página de seguridad de Google, un medio de noticias sobre estafas, una guía de una biblioteca o universidad.</li>
           </ol>
+          </div>
         </div>
       </article>
 
       <article class="t7-group c-g2" id="g2">
-        <div class="t7-group-head">
-          <p class="t7-topic">Qué hace que los videojuegos sean adictivos</p>
-          <p class="t7-names">Johneyshka Alvarez Albelo &nbsp;·&nbsp; Jesuham Otero Torres</p>
-        </div>
+        <button type="button" class="t7-group-head" aria-expanded="false">
+          <span class="t7-group-headtext">
+            <span class="t7-topic">Qué hace que los videojuegos sean adictivos</span>
+            <span class="t7-names">Johneyshka Alvarez Albelo &nbsp;·&nbsp; Jesuham Otero Torres</span>
+          </span>
+          <span class="t7-group-hint" aria-hidden="true"></span>
+          <span class="t7-group-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="t7-group-collapse">
         <div class="t7-group-body">
           <p class="t7-lead">La idea central: los juegos están <strong>diseñados a propósito</strong> para que quieras seguir jugando. No es solo "falta de fuerza de voluntad".</p>
           <ol class="t7-slides">
@@ -389,14 +422,20 @@
             <li><strong>Conclusión + opinión.</strong> ¿Los videojuegos son malos? Su postura (probablemente: no son malos, pero hay que saber cómo te están enganchando).</li>
             <li><strong>Referencias.</strong> Ej.: artículo de una universidad o museo de ciencia sobre dopamina y juegos, guía de una organización de salud, un medio serio sobre loot boxes.</li>
           </ol>
+          </div>
         </div>
       </article>
 
       <article class="t7-group c-g3" id="g3">
-        <div class="t7-group-head">
-          <p class="t7-topic">Inteligencia Artificial, ¿amiga o enemiga?</p>
-          <p class="t7-names">Diego Ramos Milian &nbsp;·&nbsp; Celyann Sánchez Pérez</p>
-        </div>
+        <button type="button" class="t7-group-head" aria-expanded="false">
+          <span class="t7-group-headtext">
+            <span class="t7-topic">Inteligencia Artificial, ¿amiga o enemiga?</span>
+            <span class="t7-names">Diego Ramos Milian &nbsp;·&nbsp; Celyann Sánchez Pérez</span>
+          </span>
+          <span class="t7-group-hint" aria-hidden="true"></span>
+          <span class="t7-group-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="t7-group-collapse">
         <div class="t7-group-body">
           <p class="t7-lead">La charla es un <strong>debate</strong>: presenten los dos lados de forma justa y al final den su respuesta con argumentos.</p>
           <ol class="t7-slides">
@@ -413,14 +452,20 @@
             <li><strong>Conclusión + opinión.</strong> Su respuesta: ¿amiga o enemiga? (probablemente "depende de cómo se use") y qué opina cada uno.</li>
             <li><strong>Referencias.</strong> Ej.: página educativa de un museo de ciencia o universidad, un medio de tecnología serio, una guía sobre deepfakes.</li>
           </ol>
+          </div>
         </div>
       </article>
 
       <article class="t7-group c-g4" id="g4">
-        <div class="t7-group-head">
-          <p class="t7-topic">¿El misterio del internet?</p>
-          <p class="t7-names">Yeray Naim Chevere Rivera &nbsp;·&nbsp; Keilianys Torres Cruz</p>
-        </div>
+        <button type="button" class="t7-group-head" aria-expanded="false">
+          <span class="t7-group-headtext">
+            <span class="t7-topic">¿El misterio del internet?</span>
+            <span class="t7-names">Yeray Naim Chevere Rivera &nbsp;·&nbsp; Keilianys Torres Cruz</span>
+          </span>
+          <span class="t7-group-hint" aria-hidden="true"></span>
+          <span class="t7-group-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="t7-group-collapse">
         <div class="t7-group-body">
           <p class="t7-lead">El "misterio" que van a resolver: <strong>¿qué pasa realmente cuando abres un video o un mensaje?</strong> Internet no es "una nube": son cables y máquinas reales.</p>
           <ol class="t7-slides">
@@ -437,14 +482,20 @@
             <li><strong>Conclusión + opinión.</strong> El misterio resuelto en una frase. Qué fue lo que más les sorprendió al investigar.</li>
             <li><strong>Referencias.</strong> Ej.: mapa de cables submarinos (TeleGeography), página educativa sobre cómo funciona internet, un medio de tecnología.</li>
           </ol>
+          </div>
         </div>
       </article>
 
       <article class="t7-group c-g5" id="g5">
-        <div class="t7-group-head">
-          <p class="t7-topic">¿Cómo se hacen los efectos especiales?</p>
-          <p class="t7-names">Adriana Cortés Vázquez &nbsp;·&nbsp; Daniella Otero Reyes</p>
-        </div>
+        <button type="button" class="t7-group-head" aria-expanded="false">
+          <span class="t7-group-headtext">
+            <span class="t7-topic">¿Cómo se hacen los efectos especiales?</span>
+            <span class="t7-names">Adriana Cortés Vázquez &nbsp;·&nbsp; Daniella Otero Reyes</span>
+          </span>
+          <span class="t7-group-hint" aria-hidden="true"></span>
+          <span class="t7-group-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="t7-group-collapse">
         <div class="t7-group-body">
           <p class="t7-lead">La idea que organiza todo: hay <strong>dos grandes familias</strong> de efectos — los prácticos (de verdad, en el set) y los digitales (hechos en computadora, CGI/VFX). Casi toda película mezcla las dos.</p>
           <ol class="t7-slides">
@@ -461,14 +512,20 @@
             <li><strong>Conclusión + opinión.</strong> ¿Los efectos "engañan" al público o "ayudan a contar la historia"? Qué opina cada una.</li>
             <li><strong>Referencias.</strong> Ej.: canal o página de un estudio de efectos, artículo de un museo del cine, un medio serio sobre cine.</li>
           </ol>
+          </div>
         </div>
       </article>
 
       <article class="t7-group c-g6" id="g6">
-        <div class="t7-group-head">
-          <p class="t7-topic">¿Cómo saben las apps lo que te gusta?</p>
-          <p class="t7-names">Irvin Javier Ortega Sánchez &nbsp;·&nbsp; Yahir Cora Carrion</p>
-        </div>
+        <button type="button" class="t7-group-head" aria-expanded="false">
+          <span class="t7-group-headtext">
+            <span class="t7-topic">¿Cómo saben las apps lo que te gusta?</span>
+            <span class="t7-names">Irvin Javier Ortega Sánchez &nbsp;·&nbsp; Yahir Cora Carrion</span>
+          </span>
+          <span class="t7-group-hint" aria-hidden="true"></span>
+          <span class="t7-group-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="t7-group-collapse">
         <div class="t7-group-body">
           <p class="t7-lead">El hilo: no es magia y <strong>no "te escuchan por el micrófono"</strong>. Es un algoritmo de recomendación que aprende de todo lo que haces en la app.</p>
           <ol class="t7-slides">
@@ -485,6 +542,7 @@
             <li><strong>Conclusión + opinión.</strong> ¿El algoritmo trabaja para ti o para la empresa? Qué van a cambiar ustedes en cómo usan las apps.</li>
             <li><strong>Referencias.</strong> Ej.: explicación de una universidad o museo sobre algoritmos, un medio de tecnología serio, una guía de privacidad como Common Sense Media.</li>
           </ol>
+          </div>
         </div>
       </article>
 
@@ -534,12 +592,20 @@
     var resetBtn = document.getElementById('t7-focus-reset');
     if(!picks.length || !groupsSection || !focusBar) return;
 
+    function setOpen(groupEl, open){
+      if(!groupEl) return;
+      groupEl.classList.toggle('is-open', open);
+      var head = groupEl.querySelector('.t7-group-head');
+      if(head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
     function focusGroup(id, opts){
       opts = opts || {};
       if(!GROUPS[id]) return;
       document.querySelectorAll('.t7-group').forEach(function(el){
         var match = el.id === id;
         el.hidden = !match;
+        setOpen(el, match);
         if(match){
           el.classList.remove('t7-reveal');
           void el.offsetWidth;
@@ -556,7 +622,7 @@
 
     function resetFocus(opts){
       opts = opts || {};
-      document.querySelectorAll('.t7-group').forEach(function(el){ el.hidden = false; });
+      document.querySelectorAll('.t7-group').forEach(function(el){ el.hidden = false; setOpen(el, false); });
       picks.forEach(function(p){ p.classList.remove('is-active'); });
       document.body.classList.remove('t7-focused');
       focusBar.hidden = true;
@@ -571,6 +637,14 @@
       });
     });
     resetBtn.addEventListener('click', function(){ resetFocus(); });
+
+    document.querySelectorAll('.t7-group-head').forEach(function(head){
+      head.addEventListener('click', function(){
+        var group = head.closest('.t7-group');
+        if(!group) return;
+        setOpen(group, !group.classList.contains('is-open'));
+      });
+    });
 
     var initial = (location.hash || '').replace('#', '');
     if(GROUPS[initial]) focusGroup(initial, {silent:true});
