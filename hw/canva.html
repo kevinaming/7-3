@@ -131,30 +131,30 @@
 
   /* Mascotas por sección: decorativas, se ocultan en pantallas angostas */
   .section-mascot{
-    position:absolute; top:6px; right:24px; width:104px; height:auto;
+    position:absolute; top:-6px; right:24px; width:172px; height:auto;
     filter:drop-shadow(3px 3px 0 var(--ink)); transform:rotate(-3deg);
   }
   @media (max-width:920px){ .section-mascot{display:none;} }
   #picker, #reglas, #estructura{position:relative;}
 
   .t7-group-avatar{
-    width:46px; height:46px; object-fit:contain; flex:none;
-    filter:drop-shadow(1.5px 1.5px 0 var(--ink));
+    width:84px; height:84px; object-fit:contain; flex:none;
+    filter:drop-shadow(2px 2px 0 var(--ink));
   }
   @media (max-width:640px){
-    .t7-group-avatar{width:68px; height:68px;}
+    .t7-group-avatar{width:104px; height:104px;}
   }
 
   .t7-note-row{display:flex; align-items:flex-end; gap:14px; margin-top:22px;}
   .t7-note-row .t7-note{margin-top:0; flex:1;}
-  .t7-note-char{width:84px; height:auto; flex:none; filter:drop-shadow(2.5px 2.5px 0 var(--ink));}
-  @media (max-width:560px){ .t7-note-char{display:none;} }
+  .t7-note-char{width:126px; height:auto; flex:none; filter:drop-shadow(2.5px 2.5px 0 var(--ink));}
+  @media (max-width:560px){ .t7-note-char{width:96px;} }
 
   .t7-cta{
     display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;
     margin-top:36px; padding-top:28px; border-top:2px dashed var(--line);
   }
-  .t7-cta img{width:150px; height:auto; filter:drop-shadow(4px 4px 0 var(--ink));}
+  .t7-cta img{width:220px; height:auto; filter:drop-shadow(4px 4px 0 var(--ink));}
   .t7-cta a.t7-cta-btn{
     font-family:'Bangers','Comic Sans MS',cursive; font-size:1.1rem; letter-spacing:.02em; color:#fff;
     background:var(--accent); border:2.5px solid var(--ink); border-radius:999px; padding:9px 24px;
@@ -239,6 +239,10 @@
   }
   .t7-group-chevron::before{content:"⌄";}
   .t7-group-head[aria-expanded="true"] .t7-group-chevron{transform:rotate(180deg);}
+  @media (max-width:640px){
+    .t7-group-head{gap:10px; padding-left:14px; padding-right:12px;}
+    .t7-group-chevron{width:16px; height:16px; font-size:.95rem;}
+  }
   .t7-group-collapse{max-height:0; overflow:hidden; transition:max-height .35s ease;}
   .t7-group.is-open .t7-group-collapse{max-height:2800px;}
   .t7-group-body{padding:16px 20px 20px;}
