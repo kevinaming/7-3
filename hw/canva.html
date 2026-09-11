@@ -140,6 +140,9 @@
     width:46px; height:46px; object-fit:contain; flex:none;
     filter:drop-shadow(1.5px 1.5px 0 var(--ink));
   }
+  @media (max-width:640px){
+    .t7-group-avatar{width:68px; height:68px;}
+  }
 
   .t7-note-row{display:flex; align-items:flex-end; gap:14px; margin-top:22px;}
   .t7-note-row .t7-note{margin-top:0; flex:1;}
@@ -216,6 +219,10 @@
   .t7-group-headtext{display:flex; flex-direction:column; gap:6px; flex:1; min-width:0;}
   .t7-group-head .t7-topic{font-family:'Bangers',cursive; font-size:1.3rem; font-weight:400; letter-spacing:.02em; color:var(--gc-text); margin:0;}
   .t7-group-head .t7-names{font-family:'JetBrains Mono',monospace; font-size:.76rem; color:var(--ink-soft); margin:0;}
+  @media (max-width:640px){
+    .t7-group-head .t7-names{display:flex; flex-direction:column; gap:2px;}
+    .t7-group-head .t7-names .t7-names-sep{display:none;}
+  }
   .t7-group-hint{
     font-family:'Kalam',cursive; font-weight:700; font-size:.72rem; text-transform:uppercase; letter-spacing:.03em;
     color:var(--ink-soft); white-space:nowrap; flex:none;
@@ -467,7 +474,7 @@
           <img class="t7-group-avatar" src="../assets/characters/gojo-ideas-grandes.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">Cómo hackear a las personas</span>
-            <span class="t7-names">Kamille Colón Valentín &nbsp;·&nbsp; Jairo Robles Rosa</span>
+            <span class="t7-names"><span class="t7-name">Kamille Colón Valentín</span><span class="t7-names-sep">&nbsp;·&nbsp;</span><span class="t7-name">Jairo Robles Rosa</span></span>
           </span>
           <span class="t7-group-hint" aria-hidden="true"></span>
           <span class="t7-group-chevron" aria-hidden="true"></span>
@@ -498,7 +505,7 @@
           <img class="t7-group-avatar" src="../assets/characters/chopper-tu-puedes.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">Qué hace que los videojuegos sean adictivos</span>
-            <span class="t7-names">Johneyshka Alvarez Albelo &nbsp;·&nbsp; Jesuham Otero Torres</span>
+            <span class="t7-names"><span class="t7-name">Johneyshka Alvarez Albelo</span><span class="t7-names-sep">&nbsp;·&nbsp;</span><span class="t7-name">Jesuham Otero Torres</span></span>
           </span>
           <span class="t7-group-hint" aria-hidden="true"></span>
           <span class="t7-group-chevron" aria-hidden="true"></span>
@@ -529,7 +536,7 @@
           <img class="t7-group-avatar" src="../assets/characters/deku-da-lo-mejor-de-ti.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">Inteligencia Artificial, ¿amiga o enemiga?</span>
-            <span class="t7-names">Diego Ramos Milian &nbsp;·&nbsp; Celyann Sánchez Pérez</span>
+            <span class="t7-names"><span class="t7-name">Diego Ramos Milian</span><span class="t7-names-sep">&nbsp;·&nbsp;</span><span class="t7-name">Celyann Sánchez Pérez</span></span>
           </span>
           <span class="t7-group-hint" aria-hidden="true"></span>
           <span class="t7-group-chevron" aria-hidden="true"></span>
@@ -560,7 +567,7 @@
           <img class="t7-group-avatar" src="../assets/characters/nezuko-buen-progreso.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">¿El misterio del internet?</span>
-            <span class="t7-names">Yeray Naim Chevere Rivera &nbsp;·&nbsp; Keilianys Torres Cruz</span>
+            <span class="t7-names"><span class="t7-name">Yeray Naim Chevere Rivera</span><span class="t7-names-sep">&nbsp;·&nbsp;</span><span class="t7-name">Keilianys Torres Cruz</span></span>
           </span>
           <span class="t7-group-hint" aria-hidden="true"></span>
           <span class="t7-group-chevron" aria-hidden="true"></span>
@@ -591,7 +598,7 @@
           <img class="t7-group-avatar" src="../assets/characters/luffy-equipo-increible.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">¿Cómo se hacen los efectos especiales?</span>
-            <span class="t7-names">Adriana Cortés Vázquez &nbsp;·&nbsp; Daniella Otero Reyes</span>
+            <span class="t7-names"><span class="t7-name">Adriana Cortés Vázquez</span><span class="t7-names-sep">&nbsp;·&nbsp;</span><span class="t7-name">Daniella Otero Reyes</span></span>
           </span>
           <span class="t7-group-hint" aria-hidden="true"></span>
           <span class="t7-group-chevron" aria-hidden="true"></span>
@@ -622,7 +629,7 @@
           <img class="t7-group-avatar" src="../assets/characters/bulma-organiza-tus-ideas.png" alt="">
           <span class="t7-group-headtext">
             <span class="t7-topic">¿Cómo saben las apps lo que te gusta?</span>
-            <span class="t7-names">Irvin Javier Ortega Sánchez &nbsp;·&nbsp; Yahir Cora Carrion</span>
+            <span class="t7-names"><span class="t7-name">Irvin Javier Ortega Sánchez</span><span class="t7-names-sep">&nbsp;·&nbsp;</span><span class="t7-name">Yahir Cora Carrion</span></span>
           </span>
           <span class="t7-group-hint" aria-hidden="true"></span>
           <span class="t7-group-chevron" aria-hidden="true"></span>
