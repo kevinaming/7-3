@@ -156,6 +156,47 @@
   }
   .t7-note strong{color:var(--teal-deep);}
 
+  /* Picker: "encuentra tu nombre" */
+  .t7-picker{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:12px;}
+  .t7-pick{
+    cursor:pointer; border:none; border-radius:14px; padding:14px 16px 13px; text-align:left;
+    background:var(--gc-bg); color:var(--gc-fg); box-shadow:var(--shadow);
+    display:flex; flex-direction:column; gap:4px; font-family:inherit;
+    transition:transform .15s ease, box-shadow .15s ease, opacity .2s ease;
+    position:relative;
+  }
+  :root[data-theme="dark"] .t7-pick{filter:saturate(.7) brightness(.72);}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .t7-pick{filter:saturate(.7) brightness(.72);}
+  }
+  .t7-pick:hover{transform:translateY(-2px);}
+  .t7-pick:active{transform:translateY(0);}
+  .t7-pick-names{font-family:'Fraunces',serif; font-weight:600; font-size:1.02rem;}
+  .t7-pick-topic{font-family:'IBM Plex Mono',monospace; font-size:.7rem; opacity:.85; line-height:1.3;}
+  .t7-pick.is-active{box-shadow:0 0 0 3px var(--teal-deep), var(--shadow);}
+  .t7-pick.is-active::after{
+    content:"✓ Tu grupo"; position:absolute; top:10px; right:12px;
+    font-family:'IBM Plex Mono',monospace; font-size:.64rem; font-weight:700; letter-spacing:.02em;
+  }
+  body.t7-focused .t7-pick:not(.is-active){opacity:.4;}
+
+  .t7-focus-bar{
+    margin-top:16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:12px 16px; box-shadow:var(--shadow); font-size:.9rem;
+  }
+  .t7-focus-dot{width:8px; height:8px; border-radius:50%; background:var(--teal); flex:none;}
+  .t7-focus-bar #t7-focus-label{color:var(--ink); font-weight:600;}
+  .t7-focus-reset{
+    margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;
+    color:#fff; background:var(--teal-btn); border:none; border-radius:999px; padding:8px 16px;
+    cursor:pointer; transition:.15s; white-space:nowrap;
+  }
+  .t7-focus-reset:hover{background:var(--teal-btn-hover);}
+
+  @keyframes t7-pop{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+  .t7-group.t7-reveal{animation:t7-pop .4s ease;}
+
   footer{padding:40px 0 60px; border-top:1px solid var(--line); background:var(--paper-alt);}
   footer p{color:var(--ink-soft); font-size:.85rem; max-width:640px;}
 
@@ -192,6 +233,47 @@
     </div>
   </div>
 </header>
+
+<section class="block" id="picker">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Antes de empezar</span>
+      <h2>Encuentra tu nombre</h2>
+      <p>Toca tu grupo y la página se enfoca solo en tu guía — el resto se oculta. Puedes volver a ver todos los grupos cuando quieras.</p>
+    </div>
+    <div class="t7-picker" id="t7-picker">
+      <button type="button" class="t7-pick c-g1" data-group="g1">
+        <span class="t7-pick-names">Kamille &amp; Jairo</span>
+        <span class="t7-pick-topic">Cómo hackear a las personas</span>
+      </button>
+      <button type="button" class="t7-pick c-g2" data-group="g2">
+        <span class="t7-pick-names">Johneyshka &amp; Jesuham</span>
+        <span class="t7-pick-topic">Videojuegos adictivos</span>
+      </button>
+      <button type="button" class="t7-pick c-g3" data-group="g3">
+        <span class="t7-pick-names">Diego &amp; Celyann</span>
+        <span class="t7-pick-topic">IA, ¿amiga o enemiga?</span>
+      </button>
+      <button type="button" class="t7-pick c-g4" data-group="g4">
+        <span class="t7-pick-names">Yeray &amp; Keilianys</span>
+        <span class="t7-pick-topic">El misterio del internet</span>
+      </button>
+      <button type="button" class="t7-pick c-g5" data-group="g5">
+        <span class="t7-pick-names">Adriana &amp; Daniella</span>
+        <span class="t7-pick-topic">Efectos especiales</span>
+      </button>
+      <button type="button" class="t7-pick c-g6" data-group="g6">
+        <span class="t7-pick-names">Irvin &amp; Yahir</span>
+        <span class="t7-pick-topic">Algoritmos de las apps</span>
+      </button>
+    </div>
+    <div class="t7-focus-bar" id="t7-focus-bar" hidden>
+      <span class="t7-focus-dot" aria-hidden="true"></span>
+      <span id="t7-focus-label"></span>
+      <button type="button" id="t7-focus-reset" class="t7-focus-reset">Ver todos los grupos</button>
+    </div>
+  </div>
+</section>
 
 <section class="block" id="reglas">
   <div class="wrap">
@@ -241,12 +323,12 @@
     <div class="section-head">
       <span class="kicker">Guía por grupo</span>
       <h2>Qué poner en cada slide, según tu tema</h2>
-      <p>Busca tu grupo. Los slides 1, 2, 10, 11 y 12 siguen el esqueleto de arriba; aquí se detalla lo que va en los slides 3 a 9 de tu tema.</p>
+      <p>Elige tu grupo en "Encuentra tu nombre" arriba, o búscalo aquí abajo. Los slides 1, 2, 10, 11 y 12 siguen el esqueleto de arriba; aquí se detalla lo que va en los slides 3 a 9 de tu tema.</p>
     </div>
 
     <div class="t7-groups">
 
-      <article class="t7-group c-g1">
+      <article class="t7-group c-g1" id="g1">
         <div class="t7-group-head">
           <p class="t7-topic">Cómo hackear a las personas</p>
           <p class="t7-names">Kamille Colón Valentín &nbsp;·&nbsp; Jairo Robles Rosa</p>
@@ -270,7 +352,7 @@
         </div>
       </article>
 
-      <article class="t7-group c-g2">
+      <article class="t7-group c-g2" id="g2">
         <div class="t7-group-head">
           <p class="t7-topic">Qué hace que los videojuegos sean adictivos</p>
           <p class="t7-names">Johneyshka Alvarez Albelo &nbsp;·&nbsp; Jesuham Otero Torres</p>
@@ -294,7 +376,7 @@
         </div>
       </article>
 
-      <article class="t7-group c-g3">
+      <article class="t7-group c-g3" id="g3">
         <div class="t7-group-head">
           <p class="t7-topic">Inteligencia Artificial, ¿amiga o enemiga?</p>
           <p class="t7-names">Diego Ramos Milian &nbsp;·&nbsp; Celyann Sánchez Pérez</p>
@@ -318,7 +400,7 @@
         </div>
       </article>
 
-      <article class="t7-group c-g4">
+      <article class="t7-group c-g4" id="g4">
         <div class="t7-group-head">
           <p class="t7-topic">¿El misterio del internet?</p>
           <p class="t7-names">Yeray Naim Chevere Rivera &nbsp;·&nbsp; Keilianys Torres Cruz</p>
@@ -342,7 +424,7 @@
         </div>
       </article>
 
-      <article class="t7-group c-g5">
+      <article class="t7-group c-g5" id="g5">
         <div class="t7-group-head">
           <p class="t7-topic">¿Cómo se hacen los efectos especiales?</p>
           <p class="t7-names">Adriana Cortés Vázquez &nbsp;·&nbsp; Daniella Otero Reyes</p>
@@ -366,7 +448,7 @@
         </div>
       </article>
 
-      <article class="t7-group c-g6">
+      <article class="t7-group c-g6" id="g6">
         <div class="t7-group-head">
           <p class="t7-topic">¿Cómo saben las apps lo que te gusta?</p>
           <p class="t7-names">Irvin Javier Ortega Sánchez &nbsp;·&nbsp; Yahir Cora Carrion</p>
@@ -417,6 +499,65 @@
       try { localStorage.setItem('theme', next); } catch(e){}
       sync();
     });
+  })();
+</script>
+<script>
+  (function(){
+    var GROUPS = {
+      g1:{label:'Kamille & Jairo — Cómo hackear a las personas'},
+      g2:{label:'Johneyshka & Jesuham — Videojuegos adictivos'},
+      g3:{label:'Diego & Celyann — IA, ¿amiga o enemiga?'},
+      g4:{label:'Yeray & Keilianys — El misterio del internet'},
+      g5:{label:'Adriana & Daniella — Efectos especiales'},
+      g6:{label:'Irvin & Yahir — Algoritmos de las apps'}
+    };
+    var picks = document.querySelectorAll('.t7-pick');
+    var groupsSection = document.getElementById('grupos');
+    var focusBar = document.getElementById('t7-focus-bar');
+    var focusLabel = document.getElementById('t7-focus-label');
+    var resetBtn = document.getElementById('t7-focus-reset');
+    if(!picks.length || !groupsSection || !focusBar) return;
+
+    function focusGroup(id, opts){
+      opts = opts || {};
+      if(!GROUPS[id]) return;
+      document.querySelectorAll('.t7-group').forEach(function(el){
+        var match = el.id === id;
+        el.hidden = !match;
+        if(match){
+          el.classList.remove('t7-reveal');
+          void el.offsetWidth;
+          el.classList.add('t7-reveal');
+        }
+      });
+      picks.forEach(function(p){ p.classList.toggle('is-active', p.dataset.group === id); });
+      document.body.classList.add('t7-focused');
+      focusLabel.textContent = 'Viendo solo: ' + GROUPS[id].label;
+      focusBar.hidden = false;
+      if(history.replaceState) history.replaceState(null, '', '#' + id);
+      if(!opts.silent) groupsSection.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    function resetFocus(opts){
+      opts = opts || {};
+      document.querySelectorAll('.t7-group').forEach(function(el){ el.hidden = false; });
+      picks.forEach(function(p){ p.classList.remove('is-active'); });
+      document.body.classList.remove('t7-focused');
+      focusBar.hidden = true;
+      if(history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+      if(!opts.silent) groupsSection.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    picks.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(btn.classList.contains('is-active')) resetFocus();
+        else focusGroup(btn.dataset.group);
+      });
+    });
+    resetBtn.addEventListener('click', function(){ resetFocus(); });
+
+    var initial = (location.hash || '').replace('#', '');
+    if(GROUPS[initial]) focusGroup(initial, {silent:true});
   })();
 </script>
 </body>
